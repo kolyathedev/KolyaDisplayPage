@@ -25,7 +25,7 @@ export default class Text {
 	}
 
 	textInit() {
-		this.fontLoader.load('/fonts/Exan_Regular.json', (font) => {
+		this.fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
 			// Material
 			this.materialText = new MeshStandardMaterial({ color: 'white' })
 
@@ -46,6 +46,7 @@ export default class Text {
 			this.textMesh = new Mesh(this.textGeometry, this.materialText)
 			this.textMesh.position.set(this.x, this.y, this.z)
 			this.textMesh.rotation.y = this.rotation
+			this.textMesh.castShadow = true
 
 			// I've added to a group in space portfolio. May have been to overcome some bug?
 
@@ -78,6 +79,7 @@ export default class Text {
 					.min(-10)
 					.max(10)
 					.step(0.1)
+				this.debugFolder.add(this.textMesh, 'castShadow')
 			}
 		})
 	}

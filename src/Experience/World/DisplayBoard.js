@@ -6,6 +6,7 @@ export default class DisplayBoard {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
+
 		this.geometry = new PlaneGeometry(3, 2, 1, 1)
 		this.material = new MeshBasicMaterial({ color: 'white' })
 		const { x, y, z } = position
@@ -27,6 +28,7 @@ export default class DisplayBoard {
 		this.mesh = new Mesh(this.geometry, this.material)
 		this.mesh.position.set(this.x, this.y, this.z)
 		this.mesh.rotation.y = this.rotation
+		this.mesh.castShadow = true
 		this.scene.add(this.mesh)
 	}
 	debugInit() {

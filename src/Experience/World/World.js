@@ -3,6 +3,9 @@ import DisplayBoard from './DisplayBoard.js'
 import Environment from './Environment.js'
 import Text from './Text.js'
 import Floor from './Floor'
+import InteractivePointLight from './InteractivePointLight.js'
+import RectLight from './RectLight'
+import InteractiveSpotLight from './SpotLight.js'
 export default class World {
 	constructor() {
 		this.experience = new Experience()
@@ -11,9 +14,16 @@ export default class World {
 
 		// Wait for resources
 		this.resources.on('ready', () => {
-			// Setup
+			// Landscape
 			this.floor = new Floor()
+
+			// Lighting
 			this.environment = new Environment()
+			this.pointLight = new InteractivePointLight()
+			this.spotLight = new InteractiveSpotLight()
+			// this.rectLight = new RectLight()
+
+			// Display Content
 			this.displayBoard = new DisplayBoard('1', { x: -0.9, y: 2, z: 3 }, 1)
 			this.displayBoard = new DisplayBoard('2', { x: 2.3, y: 2, z: 1.7 }, -0.2)
 			this.displayBoard = new DisplayBoard('3', { x: -0.9, y: -0.1, z: 3 }, 1)
