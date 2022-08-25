@@ -18,6 +18,7 @@ export default class DisplayBoard {
 		// Debug
 		if (this.debug.active) {
 			this.debugFolder = this.debug.ui.addFolder(name)
+			this.debugFolder.close()
 		}
 		this.debugInit()
 	}
