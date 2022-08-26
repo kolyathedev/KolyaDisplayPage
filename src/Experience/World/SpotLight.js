@@ -7,7 +7,7 @@ export default class InteractiveSpotLight {
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
 		this.debugObject = {
-			color: '#4e5ed4',
+			color: '#ffffff',
 		}
 
 		this.light = new SpotLight(this.debugObject.color, 1000, 0, 0.2, 0.15, 1)
@@ -26,10 +26,10 @@ export default class InteractiveSpotLight {
 		this.light.position.set(12.6, 23.5, 3.5)
 		this.light.target.position.set(11.6, 0, 5.1)
 		this.light.castShadow = true
-		this.spotLightCameraHelper = new CameraHelper(this.light.shadow.camera)
+		// this.spotLightCameraHelper = new CameraHelper(this.light.shadow.camera)
 		this.light.shadow.camera.near = 0.1
-		this.light.shadow.camera.far = 0
-		this.scene.add(this.light, this.light.target, this.spotLightCameraHelper)
+		this.light.shadow.camera.far = 30
+		this.scene.add(this.light, this.light.target)
 	}
 
 	debugInit() {

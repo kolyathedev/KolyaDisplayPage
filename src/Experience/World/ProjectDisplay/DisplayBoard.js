@@ -1,14 +1,17 @@
-import { Mesh, MeshBasicMaterial, PlaneGeometry } from 'three'
-import Experience from '../Experience'
+import { Mesh, ShaderMaterial, PlaneGeometry } from 'three'
+import Experience from '../../Experience'
+import Fragment from '../../shaders/imageShader/fragment.glsl'
+import Vertex from '../../shaders/imageShader/vertex.glsl'
 
 export default class DisplayBoard {
-	constructor(name, position, rotation) {
+	constructor(name, position, rotation, texture) {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
+		this.texture = texture
 
 		this.geometry = new PlaneGeometry(3, 2, 1, 1)
-		this.material = new MeshBasicMaterial({ color: 'white' })
+
 		const { x, y, z } = position
 		this.x = x
 		this.y = y
@@ -25,6 +28,15 @@ export default class DisplayBoard {
 	}
 
 	createGeometry() {
+		// Material
+		this.material = new ShaderMaterial({
+			vertexShader: Vertex,
+			fragmentShader: Fragment,
+			uniforms: {
+				uTexture: { value: this.texture },
+			},
+		})
+
 		this.mesh = new Mesh(this.geometry, this.material)
 		this.mesh.position.set(this.x, this.y, this.z)
 		this.mesh.rotation.y = this.rotation

@@ -7,10 +7,10 @@ export default class InteractivePointLight {
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
 		this.debugObject = {
-			color: '#100439',
+			color: '#ffffff',
 		}
 
-		this.light = new PointLight(this.debugObject.color, 10, 0, 2)
+		this.light = new PointLight(this.debugObject.color, 164, 0, 2)
 
 		// Debug
 		if (this.debug.active) {

@@ -6,6 +6,7 @@ export default class Floor {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.resources = this.experience.resources
+		this.resourceMatcap = this.resources.items.matCapTexture
 
 		this.setGeometry()
 		this.setMaterial()
@@ -14,7 +15,7 @@ export default class Floor {
 		// Debug
 		this.debug = this.experience.debug
 		this.debugObject = {
-			color: '#f40b0b',
+			color: '#ffffff',
 		}
 		if (this.debug.active) {
 			this.debugFolder = this.debug.ui.addFolder('Floor').close()
@@ -29,7 +30,7 @@ export default class Floor {
 
 	setMaterial() {
 		this.material = new THREE.MeshStandardMaterial({
-			color: '#f40b0b',
+			color: '#ffffff',
 		})
 	}
 
@@ -44,19 +45,19 @@ export default class Floor {
 	setDebug() {
 		if (this.debug.active) {
 			this.debugFolder.add(this.mesh.position, 'y').min(-20).max(20).step(0.2)
-			this.debugFolder
-				.add(this.mesh.material, 'metalness')
-				.min(0)
-				.max(1)
-				.step(0.01)
-			this.debugFolder
-				.add(this.mesh.material, 'roughness')
-				.min(0)
-				.max(1)
-				.step(0.01)
-			this.debugFolder.addColor(this.debugObject, 'color').onChange(() => {
-				this.material.color.set(this.debugObject.color)
-			})
+			// this.debugFolder
+			// 	.add(this.mesh.material, 'metalness')
+			// 	.min(0)
+			// 	.max(1)
+			// 	.step(0.01)
+			// this.debugFolder
+			// 	.add(this.mesh.material, 'roughness')
+			// 	.min(0)
+			// 	.max(1)
+			// 	.step(0.01)
+			// this.debugFolder.addColor(this.debugObject, 'color').onChange(() => {
+			// 	this.material.color.set(this.debugObject.color)
+			// })
 		}
 	}
 }

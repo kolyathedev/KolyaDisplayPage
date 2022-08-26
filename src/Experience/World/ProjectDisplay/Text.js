@@ -1,13 +1,22 @@
-import Experience from '../Experience'
+import Experience from '../../Experience'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
-import { Mesh, MeshStandardMaterial } from 'three'
+import {
+	Mesh,
+	MeshMatcapMaterial,
+	MeshNormalMaterial,
+	MeshStandardMaterial,
+	MeshToonMaterial,
+} from 'three'
 
 export default class Text {
 	constructor(text, position, rotation) {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
+		this.resources = this.experience.resources
+		this.resourceMatcap = this.resources.items.matCapTexture
+
 		this.fontLoader = new FontLoader()
 		this.text = text
 		const { x, y, z } = position
@@ -25,9 +34,10 @@ export default class Text {
 	}
 
 	textInit() {
-		this.fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
+		this.fontLoader.load('/fonts/optimer_bold.typeface.json', (font) => {
 			// Material
-			this.materialText = new MeshStandardMaterial({ color: 'white' })
+			this.materialText = new MeshMatcapMaterial()
+			this.materialText.matcap = this.resourceMatcap
 
 			// Geometry
 			this.textGeometry = new TextGeometry(this.text, {
@@ -79,6 +89,18 @@ export default class Text {
 					.min(-10)
 					.max(10)
 					.step(0.1)
+				// this.debugFolder
+				// 	.add(this.textMesh.material, 'metalness')
+				// 	.name('metalness')
+				// 	.min(0)
+				// 	.max(1)
+				// 	.step(0.1)
+				// this.debugFolder
+				// 	.add(this.textMesh.material, 'roughness')
+				// 	.name('roughness')
+				// 	.min(0)
+				// 	.max(1)
+				// 	.step(0.1)
 				this.debugFolder.add(this.textMesh, 'castShadow')
 			}
 		})

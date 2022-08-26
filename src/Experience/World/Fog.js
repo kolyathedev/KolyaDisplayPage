@@ -7,15 +7,15 @@ export default class Fog {
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
 
-		this.fog = new THREE.Fog('#040720', 3.78, 46.804)
+		this.fog = new THREE.Fog('#000', 25, 35)
 		this.scene.fog = this.fog
 
 		if (this.debug.active) {
-			this.debugFolder = this.debug.ui.addFolder('Fog')
+			this.debugFolder = this.debug.ui.addFolder('Fog').close()
 		}
 
 		this.debugObject = {
-			fogColor: '#040720',
+			fogColor: '#000',
 		}
 
 		this.setDebug()
