@@ -6,69 +6,78 @@ import InteractivePointLight from './InteractivePointLight.js'
 import ProjectDisplay from './ProjectDisplay/ProjectDisplay.js'
 import RectLight from './RectLight'
 import InteractiveSpotLight from './SpotLight.js'
+import Raycaster from '../Utils/Raycaster'
 export default class World {
 	constructor() {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.resources = this.experience.resources
 
+		// Lighting
+		// this.pointLight = new InteractivePointLight()
+		this.spotLight = new InteractiveSpotLight()
+		// this.rectLight = new RectLight()
+
 		// Wait for resources
 		this.resources.on('ready', () => {
 			// Landscape
 			this.floor = new Floor()
-
-			// Lighting
 			this.environment = new Environment()
-			// this.pointLight = new InteractivePointLight()
-			this.spotLight = new InteractiveSpotLight()
-			// this.rectLight = new RectLight()
 
 			// Display Items
 			this.spaceProject = new ProjectDisplay(
 				'Space Portfolio',
-				{ x: -5.6, y: 1.6, z: 5.1 },
-				0.8,
+				{ x: -6.5, y: 1.3, z: 2.8 },
+				0.3,
 				this.resources.items.spaceTexture,
-				{ x: -7.4, y: 3, z: 6.4 },
-				0.5
+				{ x: -8.6, y: 3.1, z: 2.5 },
+				0.2
 			)
 
 			this.eldiaProject = new ProjectDisplay(
 				'Eldia RPG',
-				{ x: 0.9, y: 1.6, z: 1.7 },
-				0.2,
+				{ x: 1.8, y: 1.6, z: 1.7 },
+				-0.1,
 				this.resources.items.eldiaTexture,
-				{ x: 0.1, y: 3, z: 1.6 },
-				0.1
+				{ x: 0.4, y: 3.3, z: 1.4 },
+				-0.2
 			)
 
 			this.rmjProject = new ProjectDisplay(
 				'Roast My Jutsu',
-				{ x: -2.6, y: 1.6, z: 3.2 },
-				0.5,
+				{ x: -2.4, y: 1.6, z: 1.6 },
+				0,
 				this.resources.items.rmjTexture,
-				{ x: -3.9, y: 3, z: 3.4 },
-				0.5
+				{ x: -4.3, y: 3.3, z: 1.6 },
+				0.1
 			)
 
 			this.stpProject = new ProjectDisplay(
 				'Stay The Path',
-				{ x: 4.9, y: 1.6, z: 2 },
-				-0.2,
+				{ x: 5.7, y: 1.6, z: 3.2 },
+				-0.4,
 				this.resources.items.stpTexture,
-				{ x: 4, y: 3, z: 1.4 },
-				-0.2
+				{ x: 4, y: 3.3, z: 2.6 },
+				-0.4
 			)
 
 			// Bio
-			this.bioHeader = new Text('Nick Gillham', { x: 8.7, y: 0.1, z: 3 }, -0.5)
+			this.bioHeader = new Text('Nick Gillham', { x: 8.7, y: 1, z: 3 }, -0.5, 0.7)
 			this.bioText = new Text(
-				'3D Javascript MERN Stack Dev ',
-				{ x: 8.7, y: -0.5, z: 3 },
-				-0.5
+				'JS ThreeJS MERN',
+				{ x: 8.7, y: 0.1, z: 3 },
+				-0.5,
+				0.6
 			)
+
+			// Raycaster For Animations
+
+			this.raycaster = new Raycaster()
 		})
 	}
 
-	update() {}
+	update() {
+		// this.pointLight.update()
+		if (this.raycaster) this.raycaster.update()
+	}
 }

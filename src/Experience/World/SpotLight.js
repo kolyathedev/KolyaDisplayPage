@@ -1,16 +1,17 @@
 import Experience from '../Experience'
-import { SpotLight, CameraHelper } from 'three'
-
+import { SpotLight, CameraHelper, Vector2 } from 'three'
+import gsap from 'gsap'
 export default class InteractiveSpotLight {
 	constructor(name) {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
-		this.debugObject = {
-			color: '#ffffff',
-		}
+		this.sizes = this.experience.sizes
 
-		this.light = new SpotLight(this.debugObject.color, 1000, 0, 0.2, 0.15, 1)
+		// Animation
+		this.webgl = document.querySelector('.webgl')
+		this.lightOn = true
+		this.mouse = new Vector2()
 
 		// Debug
 		if (this.debug.active) {
@@ -18,7 +19,14 @@ export default class InteractiveSpotLight {
 			this.debugFolder.close()
 		}
 
+		this.debugObject = {
+			color: '#ffffff',
+		}
+
+		this.light = new SpotLight(this.debugObject.color, 1000, 0, 0.2, 0.15, 1)
+
 		this.createSpotLight()
+		this.addAnimation()
 		this.debugInit()
 	}
 
@@ -29,8 +37,36 @@ export default class InteractiveSpotLight {
 		// this.spotLightCameraHelper = new CameraHelper(this.light.shadow.camera)
 		this.light.shadow.camera.near = 0.1
 		this.light.shadow.camera.far = 30
+		this.light.angle = 0
 		this.scene.add(this.light, this.light.target)
 	}
+
+	addAnimation() {
+		this.webgl.addEventListener('click', () => {
+			if (this.lightOn) {
+				gsap.to(this.light, {
+					duration: 1.5,
+					ease: 'power2.inOut',
+					angle: 0.2,
+				})
+				this.lightOn = false
+			} else {
+				gsap.to(this.light, {
+					duration: 1.5,
+					ease: 'power2.inOut',
+					angle: 0,
+				})
+				this.lightOn = true
+			}
+		})
+
+		window.addEventListener('mousemove', (e) => {
+			this.mouse.x = (e.clientX / this.sizes.width) * 2 - 1
+			this.mouse.y = -(e.clientY / this.sizes.height) * 2 + 1
+			// lol the pointer lock is locking the mouse at one coord on screen!
+		})
+	}
+	// stops the scrolling of the page when the arrow keys are hit
 
 	debugInit() {
 		if (this.debug.active) {

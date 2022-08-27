@@ -17,7 +17,7 @@ export default class ProjectDisplay {
 
 		// Display Content
 		this.displayBoardTexture = texture
-		this.displayBoard1 = new DisplayBoard(
+		this.displayBoard = new DisplayBoard(
 			name,
 			boardCoords,
 			boardRotation,

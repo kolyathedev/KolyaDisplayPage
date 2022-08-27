@@ -6,6 +6,7 @@ export default class InteractivePointLight {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
+		this.time = this.experience.time
 		this.debugObject = {
 			color: '#ffffff',
 		}
@@ -24,6 +25,10 @@ export default class InteractivePointLight {
 
 	createPointLight() {
 		this.light.position.set(6.8, 0, 5.8)
+		this.light.castShadow = true
+		this.light.shadow.mapSize.width = 256
+		this.light.shadow.mapSize.height = 256
+		this.light.shadow.camera.far = 70
 		this.scene.add(this.light)
 	}
 
@@ -58,5 +63,10 @@ export default class InteractivePointLight {
 				this.light.color.set(this.debugObject.color)
 			})
 		}
+	}
+
+	update() {
+		// this.light.position.x = Math.sin(this.time.elapsed * 0.01)
+		// this.light.position.z = Math.sin(this.time.elapsed * 0.01)
 	}
 }

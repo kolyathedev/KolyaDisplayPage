@@ -1,4 +1,9 @@
-import { Mesh, ShaderMaterial, PlaneGeometry } from 'three'
+import {
+	Mesh,
+	ShaderMaterial,
+	PlaneGeometry,
+	MeshStandardMaterial,
+} from 'three'
 import Experience from '../../Experience'
 import Fragment from '../../shaders/imageShader/fragment.glsl'
 import Vertex from '../../shaders/imageShader/vertex.glsl'
@@ -9,8 +14,15 @@ export default class DisplayBoard {
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
 		this.texture = texture
+		this.name = name
 
 		this.geometry = new PlaneGeometry(3, 2, 1, 1)
+		this.backBoardGeometry = new PlaneGeometry(4, 3, 1, 1)
+		this.backBoardMaterial = new MeshStandardMaterial({
+			color: 'white',
+			metalness: 0.5,
+			roughness: 0,
+		})
 
 		const { x, y, z } = position
 		this.x = x
@@ -18,7 +30,12 @@ export default class DisplayBoard {
 		this.z = z
 		this.rotation = rotation
 
+		this.backX = x - 0.1
+		this.backY = y
+		this.backZ = z - 0.1
+
 		this.createGeometry()
+		this.createBackboardGeometry()
 		// Debug
 		if (this.debug.active) {
 			this.debugFolder = this.debug.ui.addFolder(name)
@@ -40,8 +57,16 @@ export default class DisplayBoard {
 		this.mesh = new Mesh(this.geometry, this.material)
 		this.mesh.position.set(this.x, this.y, this.z)
 		this.mesh.rotation.y = this.rotation
-		this.mesh.castShadow = true
+		this.mesh.name = this.name
 		this.scene.add(this.mesh)
+	}
+
+	createBackboardGeometry() {
+		this.meshBackBoard = new Mesh(this.backBoardGeometry, this.backBoardMaterial)
+		this.meshBackBoard.position.set(this.backX, this.backY, this.backZ)
+		this.meshBackBoard.rotation.y = this.rotation
+		this.meshBackBoard.castShadow = true
+		this.scene.add(this.meshBackBoard)
 	}
 	debugInit() {
 		if (this.debug.active) {

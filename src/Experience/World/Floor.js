@@ -31,6 +31,8 @@ export default class Floor {
 	setMaterial() {
 		this.material = new THREE.MeshStandardMaterial({
 			color: '#ffffff',
+			metalness: 0.85,
+			roughness: 0.16,
 		})
 	}
 
@@ -45,19 +47,19 @@ export default class Floor {
 	setDebug() {
 		if (this.debug.active) {
 			this.debugFolder.add(this.mesh.position, 'y').min(-20).max(20).step(0.2)
-			// this.debugFolder
-			// 	.add(this.mesh.material, 'metalness')
-			// 	.min(0)
-			// 	.max(1)
-			// 	.step(0.01)
-			// this.debugFolder
-			// 	.add(this.mesh.material, 'roughness')
-			// 	.min(0)
-			// 	.max(1)
-			// 	.step(0.01)
-			// this.debugFolder.addColor(this.debugObject, 'color').onChange(() => {
-			// 	this.material.color.set(this.debugObject.color)
-			// })
+			this.debugFolder
+				.add(this.mesh.material, 'metalness')
+				.min(0)
+				.max(1)
+				.step(0.01)
+			this.debugFolder
+				.add(this.mesh.material, 'roughness')
+				.min(0)
+				.max(1)
+				.step(0.01)
+			this.debugFolder.addColor(this.debugObject, 'color').onChange(() => {
+				this.material.color.set(this.debugObject.color)
+			})
 		}
 	}
 }

@@ -10,7 +10,7 @@ import {
 } from 'three'
 
 export default class Text {
-	constructor(text, position, rotation) {
+	constructor(text, position, rotation, fontSize) {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
@@ -25,6 +25,8 @@ export default class Text {
 		this.z = z
 		this.rotation = rotation
 
+		this.fontSize = fontSize
+
 		// Init Debug
 		if (this.debug.active) {
 			this.debugFolder = this.debug.ui.addFolder(`${text} Text`)
@@ -34,15 +36,18 @@ export default class Text {
 	}
 
 	textInit() {
-		this.fontLoader.load('/fonts/optimer_bold.typeface.json', (font) => {
+		this.fontLoader.load('/fonts/Rajdhani_Light_Regular.json', (font) => {
 			// Material
-			this.materialText = new MeshMatcapMaterial()
-			this.materialText.matcap = this.resourceMatcap
-
+			this.materialText = new MeshStandardMaterial({
+				metalness: 1,
+				roughness: 0,
+			})
+			let size
+			this.fontSize ? (size = this.fontSize) : (size = 0.4)
 			// Geometry
 			this.textGeometry = new TextGeometry(this.text, {
 				font,
-				size: 0.4,
+				size,
 				height: 0.1,
 				curveSegments: 12,
 				bevelEnabled: true,
@@ -89,18 +94,18 @@ export default class Text {
 					.min(-10)
 					.max(10)
 					.step(0.1)
-				// this.debugFolder
-				// 	.add(this.textMesh.material, 'metalness')
-				// 	.name('metalness')
-				// 	.min(0)
-				// 	.max(1)
-				// 	.step(0.1)
-				// this.debugFolder
-				// 	.add(this.textMesh.material, 'roughness')
-				// 	.name('roughness')
-				// 	.min(0)
-				// 	.max(1)
-				// 	.step(0.1)
+				this.debugFolder
+					.add(this.textMesh.material, 'metalness')
+					.name('metalness')
+					.min(0)
+					.max(1)
+					.step(0.1)
+				this.debugFolder
+					.add(this.textMesh.material, 'roughness')
+					.name('roughness')
+					.min(0)
+					.max(1)
+					.step(0.1)
 				this.debugFolder.add(this.textMesh, 'castShadow')
 			}
 		})

@@ -20,6 +20,7 @@ export default class Environment {
 			this.debugFolder = this.debug.ui.addFolder('environment').close()
 		}
 
+		this.setEnvironmentMap()
 		this.setSunLight()
 	}
 
@@ -32,6 +33,7 @@ export default class Environment {
 		this.sunLight.shadow.camera.right = 8
 		this.sunLight.shadow.camera.top = 5
 		this.sunLight.position.set(-1.7, 10, -5.6)
+		this.sunLight.intensity = 0.2
 
 		this.sunLightCameraHelper = new CameraHelper(this.sunLight.shadow.camera)
 		this.sunLightCameraHelper.visible = false
@@ -71,6 +73,41 @@ export default class Environment {
 				this.sunLight.color.set(this.debugObject.color)
 			})
 			this.debugFolder.add(this.sunLightCameraHelper, 'visible')
+		}
+	}
+
+	setEnvironmentMap() {
+		this.environmentMap = {}
+		this.environmentMap.intensity = 4
+		this.environmentMap.texture = this.resources.items.environmentMapTexture
+		this.environmentMap.texture.encoding = THREE.sRGBEncoding
+
+		this.scene.environment = this.environmentMap.texture
+		this.scene.background = this.environmentMap.texture
+
+		this.environmentMap.updateMaterials = () => {
+			this.scene.traverse((child) => {
+				if (
+					child instanceof THREE.Mesh &&
+					child.material instanceof THREE.MeshStandardMaterial
+				) {
+					child.material.envMap = this.environmentMap.texture
+					child.material.envMapIntensity = this.environmentMap.intensity
+					child.material.needsUpdate = true
+				}
+			})
+		}
+		this.environmentMap.updateMaterials()
+
+		// Debug
+		if (this.debug.active) {
+			this.debugFolder
+				.add(this.environmentMap, 'intensity')
+				.name('envMapIntensity')
+				.min(0)
+				.max(40)
+				.step(0.001)
+				.onChange(this.environmentMap.updateMaterials)
 		}
 	}
 }
