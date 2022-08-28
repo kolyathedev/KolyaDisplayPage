@@ -2,29 +2,34 @@ import Experience from '../Experience'
 import { PointLight } from 'three'
 
 export default class InteractivePointLight {
-	constructor() {
+	constructor(position) {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
 		this.time = this.experience.time
-		this.debugObject = {
-			color: '#ffffff',
+		this.position = {
+			x: position.x,
+			y: position.y,
+			z: position.z,
 		}
-
-		this.light = new PointLight(this.debugObject.color, 164, 0, 2)
 
 		// Debug
 		if (this.debug.active) {
 			this.debugFolder = this.debug.ui.addFolder('PointLight')
 			this.debugFolder.close()
 		}
+		this.debugObject = {
+			color: '#4766ff',
+		}
+
+		this.light = new PointLight(this.debugObject.color, 164, 0, 2)
 
 		this.createPointLight()
 		this.debugInit()
 	}
 
 	createPointLight() {
-		this.light.position.set(6.8, 0, 5.8)
+		this.light.position.set(this.position.x, this.position.y, this.position.z)
 		this.light.castShadow = true
 		this.light.shadow.mapSize.width = 256
 		this.light.shadow.mapSize.height = 256

@@ -7,6 +7,7 @@ import ProjectDisplay from './ProjectDisplay/ProjectDisplay.js'
 import RectLight from './RectLight'
 import InteractiveSpotLight from './SpotLight.js'
 import Raycaster from '../Utils/Raycaster'
+import CursorAnimations from './CursorAnimations.js'
 export default class World {
 	constructor() {
 		this.experience = new Experience()
@@ -14,8 +15,9 @@ export default class World {
 		this.resources = this.experience.resources
 
 		// Lighting
-		// this.pointLight = new InteractivePointLight()
-		this.spotLight = new InteractiveSpotLight()
+		this.pointLight = new InteractivePointLight({ x: 6.8, y: -0.1, z: 5.8 })
+		this.pointLight2 = new InteractivePointLight({ x: 11.3, y: -0.1, z: 4.6 })
+		// this.spotLight = new InteractiveSpotLight()
 		// this.rectLight = new RectLight()
 
 		// Wait for resources
@@ -73,11 +75,13 @@ export default class World {
 			// Raycaster For Animations
 
 			this.raycaster = new Raycaster()
+			this.cursorAnimation = new CursorAnimations()
 		})
 	}
 
 	update() {
 		// this.pointLight.update()
 		if (this.raycaster) this.raycaster.update()
+		if (this.cursorAnimation) this.cursorAnimation.update()
 	}
 }

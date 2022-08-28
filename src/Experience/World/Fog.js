@@ -7,7 +7,7 @@ export default class Fog {
 		this.scene = this.experience.scene
 		this.debug = this.experience.debug
 
-		this.fog = new THREE.Fog('#000', 25, 35)
+		this.fog = new THREE.Fog('#000', 25, 60)
 		this.scene.fog = this.fog
 
 		if (this.debug.active) {
@@ -33,7 +33,7 @@ export default class Fog {
 				.add(this.fog, 'far')
 				.name('far')
 				.min(-50)
-				.max(50)
+				.max(500)
 				.step(0.001)
 			this.debugFolder.addColor(this.debugObject, 'fogColor').onChange(() => {
 				this.fog.color.set(this.debugObject.fogColor)

@@ -19,8 +19,8 @@ export default class DisplayBoard {
 		this.geometry = new PlaneGeometry(3, 2, 1, 1)
 		this.backBoardGeometry = new PlaneGeometry(4, 3, 1, 1)
 		this.backBoardMaterial = new MeshStandardMaterial({
-			color: 'white',
-			metalness: 0.5,
+			color: '#4766ff',
+			metalness: 0.8,
 			roughness: 0,
 		})
 
@@ -30,9 +30,9 @@ export default class DisplayBoard {
 		this.z = z
 		this.rotation = rotation
 
-		this.backX = x - 0.1
+		this.backX = x - 0.003
 		this.backY = y
-		this.backZ = z - 0.1
+		this.backZ = z - 0.003
 
 		this.createGeometry()
 		this.createBackboardGeometry()
@@ -66,6 +66,9 @@ export default class DisplayBoard {
 		this.meshBackBoard.position.set(this.backX, this.backY, this.backZ)
 		this.meshBackBoard.rotation.y = this.rotation
 		this.meshBackBoard.castShadow = true
+		this.meshBackBoard.scale.x = 0.9
+		this.meshBackBoard.scale.y = 0.9
+
 		this.scene.add(this.meshBackBoard)
 	}
 	debugInit() {
@@ -94,6 +97,30 @@ export default class DisplayBoard {
 				.name('rotation')
 				.min(-10)
 				.max(10)
+				.step(0.1)
+			this.debugFolder
+				.add(this.meshBackBoard.scale, 'y')
+				.name('y scale backboard')
+				.min(-10)
+				.max(10)
+				.step(0.1)
+			this.debugFolder
+				.add(this.meshBackBoard.scale, 'x')
+				.name('x scale backboard')
+				.min(-10)
+				.max(10)
+				.step(0.1)
+			this.debugFolder
+				.add(this.backBoardMaterial, 'metalness')
+				.name('metalness  backboard')
+				.min(0)
+				.max(1)
+				.step(0.1)
+			this.debugFolder
+				.add(this.backBoardMaterial, 'roughness')
+				.name('roughness  backboard')
+				.min(0)
+				.max(1)
 				.step(0.1)
 		}
 	}

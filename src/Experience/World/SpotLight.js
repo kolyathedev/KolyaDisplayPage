@@ -42,23 +42,23 @@ export default class InteractiveSpotLight {
 	}
 
 	addAnimation() {
-		this.webgl.addEventListener('click', () => {
-			if (this.lightOn) {
-				gsap.to(this.light, {
-					duration: 1.5,
-					ease: 'power2.inOut',
-					angle: 0.2,
-				})
-				this.lightOn = false
-			} else {
-				gsap.to(this.light, {
-					duration: 1.5,
-					ease: 'power2.inOut',
-					angle: 0,
-				})
-				this.lightOn = true
-			}
-		})
+		// this.webgl.addEventListener('click', () => {
+		// 	if (this.lightOn) {
+		// 		gsap.to(this.light, {
+		// 			duration: 1.5,
+		// 			ease: 'power2.inOut',
+		// 			angle: 0.2,
+		// 		})
+		// 		this.lightOn = false
+		// 	} else {
+		// 		gsap.to(this.light, {
+		// 			duration: 1.5,
+		// 			ease: 'power2.inOut',
+		// 			angle: 0,
+		// 		})
+		// 		this.lightOn = true
+		// 	}
+		// })
 
 		window.addEventListener('mousemove', (e) => {
 			this.mouse.x = (e.clientX / this.sizes.width) * 2 - 1
