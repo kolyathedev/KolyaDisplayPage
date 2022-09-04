@@ -23,15 +23,102 @@ export default class Raycaster extends EventEmitter {
 
 		// interactions
 		this.webglStyle = document.querySelector('.webgl').style
-		this.infoBox = document.querySelector('.infoBox')
+		this.infoBoxStp = document.querySelector('.infoBoxStp')
+		this.infoBoxRmj = document.querySelector('.infoBoxRmj')
+		this.infoBoxEldia = document.querySelector('.infoBoxEldia')
+		this.infoBoxSpace = document.querySelector('.infoBoxSpace')
 		this.stpHovered = false
 		this.eldiaHovered = false
 		this.rmjHovered = false
 		this.spaceHovered = false
+		this.noHover = false
 		this.grabOpen = true
 
 		// create Raycaster
 		this.createRaycaster()
+
+		this.smoothToSpace = () => {
+			this.infoBoxSpace.classList.add('visible')
+			gsap.to(this.controls.target, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: -6.5,
+				y: 1.3,
+				z: 2.8,
+			})
+			this.infoBoxStp.classList.remove('visible')
+			this.infoBoxRmj.classList.remove('visible')
+			this.infoBoxEldia.classList.remove('visible')
+			this.rmjHovered = false
+			this.eldiaHovered = false
+			this.stpHovered = false
+		}
+
+		this.smoothToEldia = () => {
+			this.infoBoxEldia.classList.add('visible')
+			gsap.to(this.controls.target, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: 1.8,
+				y: 1.6,
+				z: 1.7,
+			})
+			this.infoBoxSpace.classList.remove('visible')
+			this.infoBoxRmj.classList.remove('visible')
+			this.infoBoxStp.classList.remove('visible')
+			this.spaceHovered = false
+			this.rmjHovered = false
+			this.stpHovered = false
+		}
+
+		this.smoothToRmj = () => {
+			this.spaceHovered = false
+			this.eldiaHovered = false
+			this.stpHovered = false
+			this.infoBoxRmj.classList.add('visible')
+			gsap.to(this.controls.target, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: -2.5,
+				y: 1.6,
+				z: 1.6,
+			})
+			this.infoBoxSpace.classList.remove('visible')
+			this.infoBoxStp.classList.remove('visible')
+			this.infoBoxEldia.classList.remove('visible')
+		}
+
+		this.smoothToStp = () => {
+			this.infoBoxStp.classList.add('visible')
+			gsap.to(this.controls.target, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: 5.7,
+				y: 1.6,
+				z: 3.2,
+			})
+
+			this.infoBoxSpace.classList.remove('visible')
+			this.infoBoxRmj.classList.remove('visible')
+			this.infoBoxEldia.classList.remove('visible')
+			this.spaceHovered = false
+			this.rmjHovered = false
+			this.eldiaHovered = false
+		}
+
+		this.smoothToStart = async () => {
+			gsap.to(this.controls.target, {
+				duration: 1,
+				ease: 'power2.inOut',
+				x: 3.9906944166465905,
+				y: 0.6879468680988509,
+				z: 1.3662524336256123,
+			})
+			this.infoBoxSpace.classList.remove('visible')
+			this.infoBoxRmj.classList.remove('visible')
+			this.infoBoxEldia.classList.remove('visible')
+			this.infoBoxStp.classList.remove('visible')
+		}
 	}
 
 	createRaycaster() {
@@ -53,68 +140,48 @@ export default class Raycaster extends EventEmitter {
 		document.querySelector('.webgl').addEventListener('mouseup', () => {
 			this.grabOpen = true
 		})
+		document.querySelector('.webgl').addEventListener('click', () => {
+			this.stpHovered && this.smoothToStp()
+			this.eldiaHovered && this.smoothToEldia()
+			this.rmjHovered && this.smoothToRmj()
+			this.spaceHovered && this.smoothToSpace()
+		})
+		document.querySelector('.webgl').addEventListener('click', () => {
+			this.noHover && this.smoothToStart()
+		})
 	}
 
 	showNotice(board) {
 		switch (board) {
-			case 'space':
-				this.infoBox.classList.add('visible')
-				this.infoBox.innerHTML = 'Space Portfolio'
-				gsap.to(this.controls.target, {
-					duration: 2,
-					ease: 'power2.inOut',
-					x: -6.5,
-					y: 1.3,
-					z: 2.8,
-				})
+			case 'Space':
+				if (!this.spaceHovered) {
+					this.spaceHovered = true
+					this.noHover = false
+				}
 				break
-			case 'rmj':
-				this.infoBox.classList.add('visible')
-				this.infoBox.innerHTML = 'rmj'
-				gsap.to(this.controls.target, {
-					duration: 2,
-					ease: 'power2.inOut',
-					x: -2.5,
-					y: 1.6,
-					z: 1.6,
-				})
+			case 'Rmj':
+				if (!this.rmjHovered) {
+					this.rmjHovered = true
+					this.noHover = false
+				}
+
 				break
-			case 'eldia':
-				this.infoBox.classList.add('visible')
-				this.infoBox.innerHTML = 'Eldia'
-				gsap.to(this.controls.target, {
-					duration: 2,
-					ease: 'power2.inOut',
-					x: 1.8,
-					y: 1.6,
-					z: 1.7,
-				})
+			case 'Eldia':
+				if (!this.eldiaHovered) {
+					this.eldiaHovered = true
+					this.noHover = false
+				}
 				break
-			case 'stp':
-				gsap.to(this.controls.target, {
-					duration: 2,
-					ease: 'power2.inOut',
-					x: 5.7,
-					y: 1.6,
-					z: 3.2,
-				})
-				this.infoBox.classList.add('visible')
-				this.infoBox.innerHTML = 'stp'
+			case 'Stp':
+				if (!this.stpHovered) {
+					this.stpHovered = true
+					this.noHover = false
+				}
+
 				break
 			default:
 				break
 		}
-
-		setTimeout(() => {
-			this.infoBox.classList.remove('visible')
-			gsap.to(this.controls.target, {
-				duration: 2,
-				ease: 'power2.inOut',
-				x: 3.9906944166465905,
-				y: 0.6879468680988509,
-				z: 1.3662524336256123,
-			})
-		}, 4000)
 	}
 
 	update() {
@@ -128,33 +195,32 @@ export default class Raycaster extends EventEmitter {
 			switch (this.objectHit.name) {
 				case 'Space Portfolio':
 					this.webglStyle.cursor = 'pointer'
-					this.spaceHovered = true
-					this.showNotice('space')
+					this.showNotice('Space')
 					break
 				case 'Eldia RPG':
 					this.webglStyle.cursor = 'pointer'
-					this.eldiaHovered = true
-					this.showNotice('eldia')
+					this.showNotice('Eldia')
 					break
 				case 'Roast My Jutsu':
 					this.webglStyle.cursor = 'pointer'
-					this.rmjHovered = true
-					this.showNotice('rmj')
+					this.showNotice('Rmj')
 					break
 				case 'Stay The Path':
 					this.webglStyle.cursor = 'pointer'
-					this.stpHovered = true
-					this.showNotice('stp')
+					this.showNotice('Stp')
 					break
 				default:
 					break
 			}
 		} else {
-			this.stpHovered = false
-			this.eldiaHovered = false
-			this.rmjHovered = false
-			this.spaceHovered = false
 			this.grabOpen && (this.webglStyle.cursor = 'grab')
+
+			this.spaceHovered = false
+			this.rmjHovered = false
+			this.eldiaHovered = false
+			this.stpHovered = false
+
+			this.noHover = true
 		}
 	}
 }

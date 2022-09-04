@@ -15,7 +15,7 @@ export default class World {
 		this.resources = this.experience.resources
 
 		// Lighting
-		this.pointLight = new InteractivePointLight({ x: 6.8, y: -0.1, z: 5.8 })
+		// this.pointLight = new InteractivePointLight({ x: 6.8, y: -0.1, z: 5.8 })
 		this.pointLight2 = new InteractivePointLight({ x: 11.3, y: -0.1, z: 4.6 })
 		// this.spotLight = new InteractiveSpotLight()
 		// this.rectLight = new RectLight()
@@ -66,10 +66,10 @@ export default class World {
 			// Bio
 			this.bioHeader = new Text('Nick Gillham', { x: 8.7, y: 1, z: 3 }, -0.5, 0.7)
 			this.bioText = new Text(
-				'JS ThreeJS MERN',
+				'Full Stack ReactJS ThreeJS Dev',
 				{ x: 8.7, y: 0.1, z: 3 },
 				-0.5,
-				0.6
+				0.3
 			)
 
 			// Raycaster For Animations

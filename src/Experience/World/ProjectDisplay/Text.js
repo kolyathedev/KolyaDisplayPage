@@ -36,7 +36,7 @@ export default class Text {
 	}
 
 	textInit() {
-		this.fontLoader.load('/fonts/Rajdhani_Light_Regular.json', (font) => {
+		this.fontLoader.load('/fonts/Poppins.json', (font) => {
 			// Material
 			this.materialText = new MeshStandardMaterial({
 				metalness: 1,

@@ -5,7 +5,7 @@ export default class CursorAnimations {
 	constructor() {
 		this.experience = new Experience()
 		this.environment = this.experience.world.environment.environmentMap
-		this.pointLight = this.experience.world.pointLight.light
+		// this.pointLight = this.experience.world.pointLight.light
 		this.camera = this.experience.camera.instance
 		this.time = this.experience.time
 
@@ -28,11 +28,12 @@ export default class CursorAnimations {
 	update() {
 		this.environment.intensity = Math.abs(3 + this.mouse.x + this.mouse.y)
 		this.environment.updateMaterials()
-		this.pointLight.position.x = 5 * this.mouse.x
-		this.pointLight.intensity = 15 + this.mouse.y * 10
 
-		this.parallaxX = this.mouse.x * 2
-		this.parallaxY = this.mouse.y * 2
+		// this.pointLight.position.x = 30 * this.mouse.x
+		// this.pointLight.intensity = 50 - Math.abs(this.mouse.y * 50)
+
+		// this.parallaxX = this.mouse.x * 2
+		// this.parallaxY = this.mouse.y * 2
 
 		// this.camera.position.x += this.parallaxX * 0.1
 		// this.camera.position.y += this.parallaxY * 0.1
