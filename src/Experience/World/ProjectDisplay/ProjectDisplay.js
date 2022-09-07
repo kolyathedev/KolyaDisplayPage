@@ -7,24 +7,18 @@ export default class ProjectDisplay {
 		name,
 		boardCoords,
 		boardRotation,
-		texture,
 		headerCoords,
-		headerRotation
+		headerRotation,
+		source
 	) {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.resources = this.experience.resources
 
 		// Display Content
-		this.displayBoardTexture = texture
-		this.displayBoard = new DisplayBoard(
-			name,
-			boardCoords,
-			boardRotation,
-			this.displayBoardTexture
-		)
+		this.displayBoard = new DisplayBoard(name, boardCoords, boardRotation, source)
 
 		// Header
-		this.header = new Text(name, headerCoords, headerRotation)
+		this.header = new Text(name, headerCoords, headerRotation, 0.3)
 	}
 }

@@ -11,10 +11,10 @@ export default class Raycaster extends EventEmitter {
 		this.camera = this.experience.camera.instance
 		this.controls = this.experience.camera.controls
 		this.objectsToTestArray = [
-			this.experience.world.stpProject.displayBoard.mesh,
-			this.experience.world.eldiaProject.displayBoard.mesh,
-			this.experience.world.rmjProject.displayBoard.mesh,
-			this.experience.world.spaceProject.displayBoard.mesh,
+			this.experience.world.stpProject.displayBoard.model,
+			this.experience.world.eldiaProject.displayBoard.model,
+			this.experience.world.rmjProject.displayBoard.model,
+			this.experience.world.spaceProject.displayBoard.model,
 		]
 
 		// for use with mouse targeting
@@ -192,20 +192,21 @@ export default class Raycaster extends EventEmitter {
 		// console.log(this.intersectObjects)
 		if (this.intersectObjects.length > 0) {
 			this.objectHit = this.intersectObjects[0].object
+			console.log(this.objectHit.name)
 			switch (this.objectHit.name) {
-				case 'Space Portfolio':
+				case 'tile5_2':
 					this.webglStyle.cursor = 'pointer'
 					this.showNotice('Space')
 					break
-				case 'Eldia RPG':
+				case 'tile1_2':
 					this.webglStyle.cursor = 'pointer'
 					this.showNotice('Eldia')
 					break
-				case 'Roast My Jutsu':
+				case 'tile4_2':
 					this.webglStyle.cursor = 'pointer'
 					this.showNotice('Rmj')
 					break
-				case 'Stay The Path':
+				case 'tile6_2':
 					this.webglStyle.cursor = 'pointer'
 					this.showNotice('Stp')
 					break

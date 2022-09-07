@@ -11,29 +11,27 @@ export default [
 			'textures/environmentMap/nz.png',
 		],
 	},
+
+	//Tiles
+
 	{
-		name: 'spaceTexture',
-		type: 'texture',
-		path: 'textures/spaceProject/spaceProject.jpg',
+		name: 'tile1',
+		type: 'gltfModel',
+		path: 'models/tile1.glb',
 	},
 	{
-		name: 'eldiaTexture',
-		type: 'texture',
-		path: 'textures/eldia/eldia.jpg',
+		name: 'tile4',
+		type: 'gltfModel',
+		path: 'models/tile4.glb',
 	},
 	{
-		name: 'rmjTexture',
-		type: 'texture',
-		path: 'textures/rmj/rmjTexture.jpg',
+		name: 'tile5',
+		type: 'gltfModel',
+		path: 'models/tile5.glb',
 	},
 	{
-		name: 'stpTexture',
-		type: 'texture',
-		path: 'textures/stp/stpTexture.jpg',
-	},
-	{
-		name: 'matCapTexture',
-		type: 'texture',
-		path: 'textures/matcaps/4.png',
+		name: 'tile6',
+		type: 'gltfModel',
+		path: 'models/tile6.glb',
 	},
 ]

@@ -15,7 +15,7 @@ export default class World {
 		this.resources = this.experience.resources
 
 		// Lighting
-		// this.pointLight = new InteractivePointLight({ x: 6.8, y: -0.1, z: 5.8 })
+		this.pointLight = new InteractivePointLight({ x: -0.3, y: -0.1, z: 5.8 })
 		this.pointLight2 = new InteractivePointLight({ x: 11.3, y: -0.1, z: 4.6 })
 		// this.spotLight = new InteractiveSpotLight()
 		// this.rectLight = new RectLight()
@@ -24,44 +24,44 @@ export default class World {
 		this.resources.on('ready', () => {
 			// Landscape
 			this.floor = new Floor()
-			this.environment = new Environment()
 
 			// Display Items
-			this.spaceProject = new ProjectDisplay(
-				'Space Portfolio',
-				{ x: -6.5, y: 1.3, z: 2.8 },
-				0.3,
-				this.resources.items.spaceTexture,
-				{ x: -8.6, y: 3.1, z: 2.5 },
-				0.2
+			this.eldiaProject = new ProjectDisplay(
+				'Quest Of Kolya',
+				{ x: -4.5, y: -0.1, z: 2 },
+				0.2,
+				{ x: -8.2, y: 3.1, z: 2.7 },
+				0.2,
+				'tile1'
 			)
 
-			this.eldiaProject = new ProjectDisplay(
-				'Eldia RPG',
-				{ x: 1.8, y: 1.6, z: 1.7 },
+			this.stpProject = new ProjectDisplay(
+				'StayThePath',
+				{ x: -11.8, y: 0, z: 0.5 },
 				-0.1,
-				this.resources.items.eldiaTexture,
-				{ x: 0.4, y: 3.3, z: 1.4 },
-				-0.2
+				{ x: 0.9, y: 3.3, z: 1.9 },
+				-0.2,
+				'tile6'
+			)
+
+			this.spaceProject = new ProjectDisplay(
+				'Space 2D/3D Portfolio',
+				{ x: -12.9, y: 0, z: 2.9 },
+				0.1,
+				{ x: -4.7, y: 3.2, z: 2.3 },
+				0.1,
+				'tile5'
 			)
 
 			this.rmjProject = new ProjectDisplay(
 				'Roast My Jutsu',
-				{ x: -2.4, y: 1.6, z: 1.6 },
-				0,
-				this.resources.items.rmjTexture,
-				{ x: -4.3, y: 3.3, z: 1.6 },
-				0.1
-			)
-
-			this.stpProject = new ProjectDisplay(
-				'Stay The Path',
-				{ x: 5.7, y: 1.6, z: 3.2 },
+				{ x: -1.3, y: 0, z: -0.2 },
 				-0.4,
-				this.resources.items.stpTexture,
-				{ x: 4, y: 3.3, z: 2.6 },
-				-0.4
+				{ x: 4.4, y: 3.3, z: 2.5 },
+				-0.4,
+				'tile4'
 			)
+			this.environment = new Environment()
 
 			// Bio
 			this.bioHeader = new Text('Nick Gillham', { x: 8.7, y: 1, z: 3 }, -0.5, 0.7)
