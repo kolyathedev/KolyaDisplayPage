@@ -15,6 +15,7 @@ export default class Raycaster extends EventEmitter {
 			this.experience.world.eldiaProject.displayBoard.model,
 			this.experience.world.rmjProject.displayBoard.model,
 			this.experience.world.spaceProject.displayBoard.model,
+			this.experience.world.forestProject.displayBoard.model,
 		]
 
 		// for use with mouse targeting
@@ -27,10 +28,13 @@ export default class Raycaster extends EventEmitter {
 		this.infoBoxRmj = document.querySelector('.infoBoxRmj')
 		this.infoBoxEldia = document.querySelector('.infoBoxEldia')
 		this.infoBoxSpace = document.querySelector('.infoBoxSpace')
+		this.infoBoxForest = document.querySelector('.infoBoxForest')
+
 		this.stpHovered = false
 		this.eldiaHovered = false
 		this.rmjHovered = false
 		this.spaceHovered = false
+		this.forestHovered = false
 		this.noHover = false
 		this.grabOpen = true
 
@@ -49,9 +53,12 @@ export default class Raycaster extends EventEmitter {
 			this.infoBoxStp.classList.remove('visible')
 			this.infoBoxRmj.classList.remove('visible')
 			this.infoBoxEldia.classList.remove('visible')
+			this.infoBoxForest.classList.remove('visible')
+
 			this.rmjHovered = false
 			this.eldiaHovered = false
 			this.stpHovered = false
+			this.forestHovered = false
 		}
 
 		this.smoothToEldia = () => {
@@ -66,15 +73,20 @@ export default class Raycaster extends EventEmitter {
 			this.infoBoxSpace.classList.remove('visible')
 			this.infoBoxRmj.classList.remove('visible')
 			this.infoBoxStp.classList.remove('visible')
+			this.infoBoxForest.classList.remove('visible')
+
 			this.spaceHovered = false
 			this.rmjHovered = false
 			this.stpHovered = false
+			this.forestHovered = false
 		}
 
 		this.smoothToRmj = () => {
 			this.spaceHovered = false
 			this.eldiaHovered = false
 			this.stpHovered = false
+			this.forestHovered = false
+
 			this.infoBoxRmj.classList.add('visible')
 			gsap.to(this.controls.target, {
 				duration: 2,
@@ -86,6 +98,7 @@ export default class Raycaster extends EventEmitter {
 			this.infoBoxSpace.classList.remove('visible')
 			this.infoBoxStp.classList.remove('visible')
 			this.infoBoxEldia.classList.remove('visible')
+			this.infoBoxForest.classList.remove('visible')
 		}
 
 		this.smoothToStp = () => {
@@ -101,6 +114,28 @@ export default class Raycaster extends EventEmitter {
 			this.infoBoxSpace.classList.remove('visible')
 			this.infoBoxRmj.classList.remove('visible')
 			this.infoBoxEldia.classList.remove('visible')
+			this.infoBoxForest.classList.remove('visible')
+
+			this.spaceHovered = false
+			this.rmjHovered = false
+			this.eldiaHovered = false
+			this.forestHovered = false
+		}
+
+		this.smoothToForest = () => {
+			this.infoBoxForest.classList.add('visible')
+			gsap.to(this.controls.target, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: 5.7,
+				y: 1.6,
+				z: 3.2,
+			})
+
+			this.infoBoxSpace.classList.remove('visible')
+			this.infoBoxRmj.classList.remove('visible')
+			this.infoBoxEldia.classList.remove('visible')
+
 			this.spaceHovered = false
 			this.rmjHovered = false
 			this.eldiaHovered = false
@@ -118,6 +153,7 @@ export default class Raycaster extends EventEmitter {
 			this.infoBoxRmj.classList.remove('visible')
 			this.infoBoxEldia.classList.remove('visible')
 			this.infoBoxStp.classList.remove('visible')
+			this.infoBoxForest.classList.remove('visible')
 		}
 	}
 
@@ -145,6 +181,7 @@ export default class Raycaster extends EventEmitter {
 			this.eldiaHovered && this.smoothToEldia()
 			this.rmjHovered && this.smoothToRmj()
 			this.spaceHovered && this.smoothToSpace()
+			this.forestHovered && this.smoothToForest()
 		})
 		document.querySelector('.webgl').addEventListener('click', () => {
 			this.noHover && this.smoothToStart()
@@ -177,7 +214,11 @@ export default class Raycaster extends EventEmitter {
 					this.stpHovered = true
 					this.noHover = false
 				}
-
+			case 'forest':
+				if (!this.forestHovered) {
+					this.forestHovered = true
+					this.noHover = false
+				}
 				break
 			default:
 				break
@@ -192,7 +233,7 @@ export default class Raycaster extends EventEmitter {
 		// console.log(this.intersectObjects)
 		if (this.intersectObjects.length > 0) {
 			this.objectHit = this.intersectObjects[0].object
-			console.log(this.objectHit.name)
+			// console.log(this.objectHit.name)
 			switch (this.objectHit.name) {
 				case 'tile5_2':
 					this.webglStyle.cursor = 'pointer'
@@ -210,6 +251,10 @@ export default class Raycaster extends EventEmitter {
 					this.webglStyle.cursor = 'pointer'
 					this.showNotice('Stp')
 					break
+				case 'tile3_2':
+					this.webglStyle.cursor = 'pointer'
+					this.showNotice('forest')
+					break
 				default:
 					break
 			}
@@ -220,6 +265,7 @@ export default class Raycaster extends EventEmitter {
 			this.rmjHovered = false
 			this.eldiaHovered = false
 			this.stpHovered = false
+			this.forestHovered = false
 
 			this.noHover = true
 		}

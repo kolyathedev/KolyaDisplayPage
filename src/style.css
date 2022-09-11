@@ -20,6 +20,7 @@ body {
 .infoBoxStp,
 .infoBoxRmj,
 .infoBoxEldia,
+.infoBoxForest,
 .infoBoxSpace {
 	position: absolute;
 	left: 50vw;
@@ -46,7 +47,8 @@ body {
 .infoBoxStp.visible,
 .infoBoxRmj.visible,
 .infoBoxEldia.visible,
-.infoBoxSpace.visible {
+.infoBoxSpace.visible,
+.infoBoxForest.visible {
 	transform: scale(1, 1);
 }
 

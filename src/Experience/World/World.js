@@ -61,6 +61,15 @@ export default class World {
 				-0.4,
 				'tile4'
 			)
+
+			this.forestProject = new ProjectDisplay(
+				'Hyperlink Forest',
+				{ x: -4.4, y: 3.6, z: 1.5 },
+				-6.4,
+				{ x: -1.4, y: 6.5, z: 1.7 },
+				-0.2,
+				'tile3'
+			)
 			this.environment = new Environment()
 
 			// Bio

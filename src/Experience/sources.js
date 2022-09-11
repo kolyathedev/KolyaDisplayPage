@@ -19,6 +19,12 @@ export default [
 		type: 'gltfModel',
 		path: 'models/tile1.glb',
 	},
+
+	{
+		name: 'tile3',
+		type: 'gltfModel',
+		path: 'models/tile3.glb',
+	},
 	{
 		name: 'tile4',
 		type: 'gltfModel',
