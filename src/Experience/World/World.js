@@ -15,9 +15,9 @@ export default class World {
 		this.resources = this.experience.resources
 
 		// Lighting
-		this.pointLight = new InteractivePointLight({ x: -0.3, y: -0.1, z: 5.8 })
+		// this.pointLight = new InteractivePointLight({ x: -0.3, y: -0.1, z: 5.8 })
 		this.pointLight2 = new InteractivePointLight({ x: 11.3, y: -0.1, z: 4.6 })
-		// this.spotLight = new InteractiveSpotLight()
+		this.spotLight = new InteractiveSpotLight()
 		// this.rectLight = new RectLight()
 
 		// Wait for resources
@@ -27,12 +27,13 @@ export default class World {
 
 			// Display Items
 			this.eldiaProject = new ProjectDisplay(
-				'Quest Of Kolya',
+				"Big Mama's Mushroom Mania",
 				{ x: -4.5, y: -0.1, z: 2 },
 				0.2,
-				{ x: -8.2, y: 3.1, z: 2.7 },
+				{ x: -8.6, y: 2.8, z: 2.7 },
 				0.2,
-				'tile1'
+				'tile1',
+				0.25
 			)
 
 			this.stpProject = new ProjectDisplay(
@@ -75,7 +76,7 @@ export default class World {
 			// Bio
 			this.bioHeader = new Text('Nick Gillham', { x: 8.7, y: 1, z: 3 }, -0.5, 0.7)
 			this.bioText = new Text(
-				'Full Stack ReactJS ThreeJS Dev',
+				'Full Stack MERN & ThreeJS Dev',
 				{ x: 8.7, y: 0.1, z: 3 },
 				-0.5,
 				0.3
@@ -92,5 +93,6 @@ export default class World {
 		// this.pointLight.update()
 		if (this.raycaster) this.raycaster.update()
 		if (this.cursorAnimation) this.cursorAnimation.update()
+		this.spotLight && this.spotLight.update()
 	}
 }

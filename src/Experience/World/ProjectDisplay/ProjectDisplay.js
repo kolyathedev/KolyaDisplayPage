@@ -9,16 +9,22 @@ export default class ProjectDisplay {
 		boardRotation,
 		headerCoords,
 		headerRotation,
-		source
+		source,
+		fontSize
 	) {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.resources = this.experience.resources
-
+		this.fontSize = fontSize
 		// Display Content
 		this.displayBoard = new DisplayBoard(name, boardCoords, boardRotation, source)
 
 		// Header
-		this.header = new Text(name, headerCoords, headerRotation, 0.3)
+		this.header = new Text(
+			name,
+			headerCoords,
+			headerRotation,
+			fontSize ? fontSize : 0.3
+		)
 	}
 }

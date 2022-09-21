@@ -46,9 +46,16 @@ export default class Raycaster extends EventEmitter {
 			gsap.to(this.controls.target, {
 				duration: 2,
 				ease: 'power2.inOut',
-				x: -6.5,
-				y: 1.3,
-				z: 2.8,
+				x: 0,
+				y: 1.6,
+				z: 3.2,
+			})
+			gsap.to(this.controls.object.position, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: -1.2436908861070275,
+				y: 1.8155473048016435,
+				z: 10.643615642758764,
 			})
 			this.infoBoxStp.classList.remove('visible')
 			this.infoBoxRmj.classList.remove('visible')
@@ -66,9 +73,16 @@ export default class Raycaster extends EventEmitter {
 			gsap.to(this.controls.target, {
 				duration: 2,
 				ease: 'power2.inOut',
-				x: 1.8,
+				x: -4,
 				y: 1.6,
-				z: 1.7,
+				z: 3.2,
+			})
+			gsap.to(this.controls.object.position, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: -1.2436908861070275,
+				y: 1.8155473048016435,
+				z: 10.643615642758764,
 			})
 			this.infoBoxSpace.classList.remove('visible')
 			this.infoBoxRmj.classList.remove('visible')
@@ -91,9 +105,16 @@ export default class Raycaster extends EventEmitter {
 			gsap.to(this.controls.target, {
 				duration: 2,
 				ease: 'power2.inOut',
-				x: -2.5,
+				x: 8.5,
 				y: 1.6,
 				z: 1.6,
+			})
+			gsap.to(this.controls.object.position, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: 1.3261597004730659,
+				y: 1.6000000000000008,
+				z: 11.457881042164475,
 			})
 			this.infoBoxSpace.classList.remove('visible')
 			this.infoBoxStp.classList.remove('visible')
@@ -109,6 +130,13 @@ export default class Raycaster extends EventEmitter {
 				x: 5.7,
 				y: 1.6,
 				z: 3.2,
+			})
+			gsap.to(this.controls.object.position, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: -1.0338212517004601,
+				y: 1.9182158553510318,
+				z: 11.194674280082424,
 			})
 
 			this.infoBoxSpace.classList.remove('visible')
@@ -127,9 +155,16 @@ export default class Raycaster extends EventEmitter {
 			gsap.to(this.controls.target, {
 				duration: 2,
 				ease: 'power2.inOut',
-				x: 5.7,
-				y: 1.6,
-				z: 3.2,
+				x: 4,
+				y: 6.5,
+				z: 1.7,
+			})
+			gsap.to(this.controls.object.position, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: -1.3753161712780102,
+				y: 6.7748337507552625,
+				z: 12.177470357253018,
 			})
 
 			this.infoBoxSpace.classList.remove('visible')
@@ -142,8 +177,15 @@ export default class Raycaster extends EventEmitter {
 		}
 
 		this.smoothToStart = async () => {
+			gsap.to(this.controls.object.position, {
+				duration: 2,
+				ease: 'power2.inOut',
+				x: -6.23115654920406,
+				y: 0.6879470000000014,
+				z: 22.054098635464182,
+			})
 			gsap.to(this.controls.target, {
-				duration: 1,
+				duration: 2,
 				ease: 'power2.inOut',
 				x: 3.9906944166465905,
 				y: 0.6879468680988509,
@@ -227,6 +269,8 @@ export default class Raycaster extends EventEmitter {
 
 	update() {
 		this.raycaster.setFromCamera(this.mouse, this.camera)
+		// console.log(this.controls.object.position)
+
 		this.intersectObjects = this.raycaster.intersectObjects(
 			this.objectsToTestArray
 		)

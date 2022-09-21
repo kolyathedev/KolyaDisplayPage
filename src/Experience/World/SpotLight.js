@@ -23,7 +23,7 @@ export default class InteractiveSpotLight {
 			color: '#ffffff',
 		}
 
-		this.light = new SpotLight(this.debugObject.color, 1000, 0, 0.2, 0.15, 1)
+		this.light = new SpotLight(this.debugObject.color, 1000, 0, 0.2, 0.165, 1)
 
 		this.createSpotLight()
 		this.addAnimation()
@@ -31,13 +31,13 @@ export default class InteractiveSpotLight {
 	}
 
 	createSpotLight() {
-		this.light.position.set(12.6, 23.5, 3.5)
+		this.light.position.set(4.3, 23.1, 3.5)
 		this.light.target.position.set(11.6, 0, 5.1)
 		this.light.castShadow = true
 		// this.spotLightCameraHelper = new CameraHelper(this.light.shadow.camera)
 		this.light.shadow.camera.near = 0.1
 		this.light.shadow.camera.far = 30
-		this.light.angle = 0
+		// this.light.angle = 0
 		this.scene.add(this.light, this.light.target)
 	}
 
@@ -118,7 +118,7 @@ export default class InteractiveSpotLight {
 				.add(this.light, 'angle')
 				.min(0)
 				.max(Math.PI * 2)
-				.step(0.1)
+				.step(0.005)
 			this.debugFolder
 				.add(this.light.shadow.camera, 'near')
 				.min(0)
@@ -128,5 +128,10 @@ export default class InteractiveSpotLight {
 				this.light.color.set(this.debugObject.color)
 			})
 		}
+	}
+
+	update() {
+		this.light.target.position.x = this.mouse.x * 10
+		this.light.target.position.z = -this.mouse.y * 10
 	}
 }
